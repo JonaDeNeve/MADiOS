@@ -8,8 +8,23 @@
 import SwiftUI
 
 struct GuessedTypesView: View {
+//    var type: PType
+    var spacing: CGFloat = 1
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        LazyVGrid(
+            columns: [GridItem(.adaptive(minimum: 10), spacing: spacing)],
+            spacing: spacing)
+        {
+            TypeView()
+        }
+    }
+}
+                            
+struct TypeView: View {
+            
+    var body: some View {
+        Text("Type")
     }
 }
 

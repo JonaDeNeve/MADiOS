@@ -21,6 +21,10 @@
 		322FC06829556BFC00E4C753 /* PokeballUpper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322FC06729556BFC00E4C753 /* PokeballUpper.swift */; };
 		322FC06A29556CB700E4C753 /* Pokeball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322FC06929556CB700E4C753 /* Pokeball.swift */; };
 		322FC06C295571D400E4C753 /* PokeballStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322FC06B295571D400E4C753 /* PokeballStatus.swift */; };
+		3242AB72295A388900E6A22A /* UtilityViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3242AB71295A388900E6A22A /* UtilityViews.swift */; };
+		3242AB74295A5D1C00E6A22A /* SquirdleStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3242AB73295A5D1C00E6A22A /* SquirdleStore.swift */; };
+		3242AB7F295A74D800E6A22A /* PARequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3242AB7E295A74D800E6A22A /* PARequest.swift */; };
+		3242AB81295AAC8200E6A22A /* PA+Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3242AB80295AAC8200E6A22A /* PA+Pokemon.swift */; };
 		32F97AE22956401200EF1D29 /* Squirdle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F97AE12956401200EF1D29 /* Squirdle.swift */; };
 		32F97AEB2958E39C00EF1D29 /* PAPokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F97AEA2958E39C00EF1D29 /* PAPokemon.swift */; };
 		32F97AED2958E4E400EF1D29 /* SquirdleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F97AEC2958E4E400EF1D29 /* SquirdleViewModel.swift */; };
@@ -65,6 +69,10 @@
 		322FC06729556BFC00E4C753 /* PokeballUpper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeballUpper.swift; sourceTree = "<group>"; };
 		322FC06929556CB700E4C753 /* Pokeball.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokeball.swift; sourceTree = "<group>"; };
 		322FC06B295571D400E4C753 /* PokeballStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeballStatus.swift; sourceTree = "<group>"; };
+		3242AB71295A388900E6A22A /* UtilityViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityViews.swift; sourceTree = "<group>"; };
+		3242AB73295A5D1C00E6A22A /* SquirdleStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquirdleStore.swift; sourceTree = "<group>"; };
+		3242AB7E295A74D800E6A22A /* PARequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PARequest.swift; sourceTree = "<group>"; };
+		3242AB80295AAC8200E6A22A /* PA+Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PA+Pokemon.swift"; sourceTree = "<group>"; };
 		32F97AE12956401200EF1D29 /* Squirdle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Squirdle.swift; sourceTree = "<group>"; };
 		32F97AEA2958E39C00EF1D29 /* PAPokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAPokemon.swift; sourceTree = "<group>"; };
 		32F97AEC2958E4E400EF1D29 /* SquirdleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquirdleViewModel.swift; sourceTree = "<group>"; };
@@ -182,6 +190,7 @@
 		322FC05D2954EC8C00E4C753 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				322FC06B295571D400E4C753 /* PokeballStatus.swift */,
 				32F97AE12956401200EF1D29 /* Squirdle.swift */,
 			);
 			path = Models;
@@ -208,6 +217,8 @@
 			isa = PBXGroup;
 			children = (
 				32F97AEA2958E39C00EF1D29 /* PAPokemon.swift */,
+				3242AB7E295A74D800E6A22A /* PARequest.swift */,
+				3242AB80295AAC8200E6A22A /* PA+Pokemon.swift */,
 			);
 			path = PokeAPI;
 			sourceTree = "<group>";
@@ -215,8 +226,8 @@
 		32F97AF229592F4200EF1D29 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				322FC06B295571D400E4C753 /* PokeballStatus.swift */,
 				32F97AEC2958E4E400EF1D29 /* SquirdleViewModel.swift */,
+				3242AB73295A5D1C00E6A22A /* SquirdleStore.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -224,9 +235,10 @@
 		32F97AF929593B8000EF1D29 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				32F97AF729593B7700EF1D29 /* GuessedTypesView.swift */,
 				32F97AF3295937E500EF1D29 /* GuessedPokemonView.swift */,
 				322FC06929556CB700E4C753 /* Pokeball.swift */,
+				32F97AF729593B7700EF1D29 /* GuessedTypesView.swift */,
+				3242AB71295A388900E6A22A /* UtilityViews.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -371,15 +383,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3242AB81295AAC8200E6A22A /* PA+Pokemon.swift in Sources */,
 				322FC06A29556CB700E4C753 /* Pokeball.swift in Sources */,
 				32F97AF829593B7700EF1D29 /* GuessedTypesView.swift in Sources */,
+				3242AB72295A388900E6A22A /* UtilityViews.swift in Sources */,
 				322FC0332953A37200E4C753 /* Persistence.swift in Sources */,
 				322FC05B2954E19400E4C753 /* PokeballLower.swift in Sources */,
 				32F97AED2958E4E400EF1D29 /* SquirdleViewModel.swift in Sources */,
 				322FC02C2953A37000E4C753 /* HomeView.swift in Sources */,
+				3242AB7F295A74D800E6A22A /* PARequest.swift in Sources */,
 				322FC02A2953A37000E4C753 /* PokadeApp.swift in Sources */,
 				322FC06C295571D400E4C753 /* PokeballStatus.swift in Sources */,
 				322FC06829556BFC00E4C753 /* PokeballUpper.swift in Sources */,
+				3242AB74295A5D1C00E6A22A /* SquirdleStore.swift in Sources */,
 				32F97AEB2958E39C00EF1D29 /* PAPokemon.swift in Sources */,
 				322FC0362953A37200E4C753 /* Pokade.xcdatamodeld in Sources */,
 				32F97AF6295937F900EF1D29 /* PokemonDetailView.swift in Sources */,

@@ -8,6 +8,7 @@
 import SwiftUI
 struct SquirdleView: View {
     @ObservedObject var squirdle: SquirdleViewModel
+    @State private var guess = ""
     
     var body: some View {
         GeometryReader { geo in
@@ -19,37 +20,53 @@ struct SquirdleView: View {
                     Text("Height")
                     Text("Weight")
                 }
-                .font(tableHeaderFont(for: geo))
+                .font(calculateFont(for: geo, with: 0.06))
                 .padding(.horizontal)
                 ScrollView {
-                    GuessedPokemonView()
-                    GuessedPokemonView()
-                    GuessedPokemonView()
-                    GuessedPokemonView()
-                    GuessedPokemonView()
-                    GuessedPokemonView()
-                    GuessedPokemonView()
+                    ForEach(squirdle.guesses.reversed()) { pokemon in
+                        NavigationLink {
+                            PokemonDetailView(pokemon)
+                        } label: {
+                            GuessedPokemonView(squirdle.compare(pokemon: pokemon), pokemon)
+                                .foregroundColor(.primary)
+                        }
+                    }
                 }
                 GuessedTypesView()
                     .padding(.horizontal)
                 HStack {
-                    Text("Test")
+                    TextField("Guess", text: $guess)
                     Button("Submit") {
-                        
+                        squirdle.guess(guess)
+                        guess = ""
                     }
                 }
+                .font(calculateFont(for: geo, with: 0.06))
                 .padding(.horizontal)
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .compactableToolbar {
+            AnimatedActionButton(title: "Settings", systemImage: "gearshape") {
+                
+            }
+            AnimatedActionButton(title: "How to play", systemImage: "info.circle") {
+                
             }
         }
     }
     
-    private func tableHeaderFont(for geometry: GeometryProxy) -> Font {
-        Font.system(size: geometry.size.width * 0.06)
+    private func calculateFont(for geo: GeometryProxy, with scale: CGFloat) -> Font {
+        Font.system(size: geo.size.width * scale)
+    }
+    
+    init(_ squirdle: SquirdleViewModel) {
+        self.squirdle = squirdle
     }
 }
 
 struct SquirdleView_Previews: PreviewProvider {
     static var previews: some View {
-        SquirdleView(squirdle: SquirdleViewModel())
+        SquirdleView(SquirdleViewModel())
     }
 }

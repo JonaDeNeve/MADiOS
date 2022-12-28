@@ -8,18 +8,26 @@
 import Foundation
 
 struct Squirdle {
-    var pokemon = Pokemon(name: "Squirtle", gen: 1, type1: "blank", type2: "Water", height: 5, weight: 89)
-    var guesses = [Pokemon]()
+    private(set) var pokemon: PAPokemon
+    private(set) var guesses = [PAPokemon]()
+    private(set) var isComplete = false
     
-    init() {
-        pokemon = randomPokemon()
+    init(_ pokemon: PAPokemon) {
+        self.pokemon = pokemon
+        print(pokemon)
     }
     
-    mutating func addGuess() {
-//        guesses.append(Pokemon())
+    mutating func guess(guess: PAPokemon) {
+        guesses.append(guess)
+        if guess == self.pokemon {
+            isComplete = true
+        }
     }
     
-    func randomPokemon() -> Pokemon {
-        Pokemon(name: "Squirtle", gen: 1, type1: "blank", type2: "Water", height: 5, weight: 89)
+    func compare(_ pokemon: PAPokemon) -> [PokeballStatus] {
+        if self.pokemon == pokemon {
+            return [.correct, .correct, .correct, .correct, .correct]
+        }
+        return self.pokemon.compare(pokemon)
     }
 }
