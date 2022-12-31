@@ -10,22 +10,54 @@ import Combine
 
 class SquirdleViewModel: ObservableObject, Identifiable {
     
+    // MARK: Variables
+    
     private(set) var id = UUID()
     @Published private(set) var model: Squirdle!
+    @Published private(set) var latest = [PAPokemon]()
+    static let typeColours = [
+        "normal": "#A8A77A",
+        "fire": "#EE8130",
+        "water": "#6390F0",
+        "electric": "#F7D02C",
+        "grass": "#7AC74C",
+        "ice": "#96D9D6",
+        "fighting": "#C22E28",
+        "poison": "#A33EA1",
+        "ground": "#E2BF65",
+        "flying": "#A98FF3",
+        "psychic": "#F95587",
+        "bug": "#A6B91A",
+        "rock": "#B6A136",
+        "ghost": "#735797",
+        "dragon": "#6F35FC",
+        "dark": "#705746",
+        "steel": "#B7B7CE",
+        "fairy": "#D685AD",
+    ]
     
+    var name: String = ""
     var guesses: [PAPokemon] {
         model.guesses
     }
     
+    var guessedTypes: [String] {
+        model.guessedTypes
+    }
+    
     init() {
         model = Squirdle(randomPokemon())
+//        fetchPokemonList()
+        print("Latest: \(latest)")
     }
+    
+    // MARK: Functions
     
     func guess(_ guess: String) {
         if guess.isEmpty {
             return
         }
-        let pokemon = fetchPokemon(pokemon: guess)
+        let pokemon = fetchPokemon(pokemon: guess.lowercased())
         print(pokemon)
         model.guess(guess: pokemon)
     }
@@ -44,24 +76,20 @@ class SquirdleViewModel: ObservableObject, Identifiable {
             random += 95
         }
         return fetchPokemon(pokemon: "\(random)")
-//        PAPokemon(id: 1, name: "Squirtle", type1: "blank", type2: "Water", height: 5, weight: 89, game_index: 0)
     }
     
     private func fetchPokemon(pokemon: String) -> PAPokemon {
-        var value: Set<PAPokemon> = []
-        pAResultsCancellable = nil
-        pARequest?.stopFetching()
-        pARequest = nil
+//        return Dummy.pokemon
+        var response = Dummy.pokemon
+        let group = DispatchGroup()
+        group.enter()
         
-        pARequest = PokemonRequest.create(pokemon: pokemon)
-        pARequest?.fetch(andRepeatEvery: 0)
-        pAResultsCancellable = pARequest?.results.sink { results in
-            value = results
+        DispatchQueue.global(qos: .default).async {
+            response = PokemonRequest.fetch(pokemon) ?? Dummy.pokemon
+            group.leave()
         }
-        return value.first ?? PAPokemon(id: 0, name: "MissingNo.", type1: "", type2: "", height: 0, weight: 0, game_index: 0)
+        group.wait()
+        return response
     }
-    
-    private(set) var pARequest: PokemonRequest!
-    private var pAResultsCancellable: AnyCancellable?
     
 }

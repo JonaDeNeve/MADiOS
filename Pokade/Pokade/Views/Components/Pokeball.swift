@@ -46,6 +46,7 @@ struct Pokeball: View {
                 .offset(y: -geo.size.height/6.8)
                 .foregroundColor(.white)
             }
+            .foregroundColor(.black)
         }
     }
     
@@ -71,6 +72,7 @@ struct Pokeball: View {
     }
 }
 
+// MARK: Preview
 
 struct Pokeball_Previews: PreviewProvider {
     static var previews: some View {

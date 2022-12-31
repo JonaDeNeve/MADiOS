@@ -32,7 +32,7 @@ struct SquirdleView: View {
                         }
                     }
                 }
-                GuessedTypesView()
+                GuessedTypesView(guessedTypes: squirdle.guessedTypes)
                     .padding(.horizontal)
                 HStack {
                     TextField("Guess", text: $guess)
@@ -46,14 +46,6 @@ struct SquirdleView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
-        .compactableToolbar {
-            AnimatedActionButton(title: "Settings", systemImage: "gearshape") {
-                
-            }
-            AnimatedActionButton(title: "How to play", systemImage: "info.circle") {
-                
-            }
-        }
     }
     
     private func calculateFont(for geo: GeometryProxy, with scale: CGFloat) -> Font {
@@ -64,6 +56,8 @@ struct SquirdleView: View {
         self.squirdle = squirdle
     }
 }
+
+// MARK: Preview
 
 struct SquirdleView_Previews: PreviewProvider {
     static var previews: some View {

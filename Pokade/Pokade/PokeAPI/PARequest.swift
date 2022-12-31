@@ -74,6 +74,8 @@ class PARequest<Fetched> where Fetched: Codable, Fetched: Hashable
                 if offset == 0 { fetchSequenceCount = 0 }
                 fetchCancellable = URLSession.shared.dataTaskPublisher(for: urlRequest)
                     .map { [weak self] data, response in
+                        let x = self?.decode(data) ?? []
+                        print("Decode: \(x)")
                         return self?.decode(data) ?? []
                     }
                     .replaceError(with: [])
@@ -157,6 +159,18 @@ class PARequest<Fetched> where Fetched: Codable, Fetched: Hashable
 // MARK: - Extensions
 
 extension String {
+    mutating func addPokeAPIArgument(_ name: String, _ value: Int? = nil, `default` defaultValue: Int = 0) {
+        if value != nil, value != defaultValue {
+            addPokeAPIArgument(name, "\(value!)")
+        }
+    }
+    
+    mutating func addPokeAPIArgument(_ name: String, _ value: String?) {
+        if value != nil {
+            self += (hasSuffix("?") ? "" : "&") + name + "=" + value!
+        }
+    }
+    
     mutating func addPokeAPIArgument(_ value: Int? = nil, `default` defaultValue: Int = 0) {
         if value != nil, value != defaultValue {
             addPokeAPIArgument("\(value!)")

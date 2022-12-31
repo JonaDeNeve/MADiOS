@@ -7,22 +7,27 @@
 
 import Foundation
 
-struct PAPokemon: Codable, Hashable, Identifiable, CustomStringConvertible {
+struct PAPokemon: Codable, Hashable, Identifiable, Comparable, CustomStringConvertible {
+    
+    // MARK: Variables
+    
+    var test: String? = "Test"
     var id: Int
     var name: String
-    var type1: String
-    var type2: String
+    var types: [PAPokemonType]
     var height: Int
     var weight: Int
-    var game_index: Int
-    var gen: Int { game_index }
+    var game_indices: [PAVersionGameIndex]
+    
+    var type1: String { types[0].type.name }
+    var type2: String { types[1].type.name }
+    var gen: Int { game_indices[0].game_index }
     
     private enum CodingKeys: String, CodingKey {
-        case id, name, height, weight
-        case type1 = "types[0].type.name"
-        case type2 = "types[1].type.name"
-        case game_index = "game_indices[0].game_index"
+        case id, name, height, weight, types, game_indices
     }
+    
+    // MARK: Functions
     
     func compare(_ guess: Self) -> [PokeballStatus] {
         var status: [PokeballStatus] = []
@@ -38,6 +43,7 @@ struct PAPokemon: Codable, Hashable, Identifiable, CustomStringConvertible {
     
     func hash(into hasher: inout Hasher) { hasher.combine(id) }
     static func ==(lhs: PAPokemon, rhs: PAPokemon) -> Bool { lhs.id == rhs.id }
+    static func < (lhs: PAPokemon, rhs: PAPokemon) -> Bool { lhs.id < rhs.id }
 
     var description: String {
         return "\(name) \(gen) \(type1) \(type2) \(height) \(weight)"
@@ -79,3 +85,37 @@ struct PAPokemon: Codable, Hashable, Identifiable, CustomStringConvertible {
     }
 }
 
+
+// MARK: PAPokemonType
+
+struct PAPokemonType: Codable {
+    var slot: Int
+    var type: NamedAPIResource<Any>
+    
+    private enum CodingKeys: String, CodingKey {
+        case slot, type
+    }
+}
+
+
+// MARK: PAVersionGameIndex
+
+struct PAVersionGameIndex: Codable {
+    var game_index: Int
+    var version: NamedAPIResource<Any>
+    
+    private enum CodingKeys: String, CodingKey {
+        case game_index, version
+    }
+}
+
+// MARK: NamedAPIResource
+
+struct NamedAPIResource<T>: Codable {
+    var name: String
+    var url: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case name, url
+    }
+}

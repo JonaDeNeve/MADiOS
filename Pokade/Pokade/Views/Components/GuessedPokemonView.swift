@@ -34,10 +34,12 @@ struct GuessedPokemonView: View {
     }
 }
 
+// MARK: Preview
+
 struct GuessedPokemonView_Previews: PreviewProvider {
     static var previews: some View {
         GuessedPokemonView(
             [.incorrect, .wrongPosition, .incorrect, .lower, .higher],
-            PAPokemon(id: 1, name: "Squirtle", type1: "Blank", type2: "Water", height: 5, weight: 89, game_index: 0))
+            Dummy.pokemon)
     }
 }

@@ -7,7 +7,9 @@
 
 import SwiftUI
 
+// MARK: AnimatedActionButton
 //Copied from L16 EmojiArt
+
 struct AnimatedActionButton: View {
     var title: String? = nil
     var systemImage: String? = nil
@@ -30,6 +32,9 @@ struct AnimatedActionButton: View {
     }
 }
 
+// MARK: View
+//Copied from L16 EmojiArt
+
 extension View {
     func compactableToolbar<Content>(@ViewBuilder content: () -> Content) -> some View where Content: View {
         self.toolbar {
@@ -37,6 +42,10 @@ extension View {
         }
     }
 }
+
+// MARK: CompactableIntoContextMenu
+//Copied from L16 EmojiArt
+
 
 struct CompactableIntoContextMenu: ViewModifier {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass

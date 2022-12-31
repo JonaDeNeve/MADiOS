@@ -11,6 +11,8 @@ struct HomeView: View {
     
     @EnvironmentObject private var store: SquirdleStore
     @State private var editMode: EditMode = .inactive
+    @State private var isEditing = false
+    @State private var gameToEdit: SquirdleViewModel?
     @State private var games: [SquirdleViewModel] = [SquirdleViewModel(),SquirdleViewModel()]
     
     var body: some View {
@@ -19,6 +21,9 @@ struct HomeView: View {
                 ForEach(games) { game in
                     if editMode == .active {
                         rowContent(for: game)
+                            .onTapGesture {
+                                gameToEdit = game
+                            }
                     } else {
                         NavigationLink {
                             SquirdleView(game)
@@ -37,30 +42,46 @@ struct HomeView: View {
             .navigationTitle("Squirdle")
             .listStyle(.grouped)
             .toolbar {
-                ToolbarItem() {
-                    Button(action: newGame) {
-                        Image(systemName: "plus")
-                    }
-                }
                 ToolbarItem {
                     EditButton()
                 }
             }
+            .compactableToolbar {
+                AnimatedActionButton(title: "New game", systemImage: "plus") {
+                    newGame()
+                }
+                AnimatedActionButton(title: "How to play", systemImage: "info.circle") {
+                    
+                }
+            }
             .environment(\.editMode, $editMode)
         }
+        .popover(item: $gameToEdit) { game in
+            let index = games.firstIndex { $0.id == game.id }!
+            NewGameForm(squirdle: $games[index])
+        }
+    }
+    
+    init() {
+        self.gameToEdit = games.first
     }
     
     private func rowContent(for squirdle: SquirdleViewModel) -> some View {
         VStack(alignment: .leading) {
-            Text("Game: \(squirdle.id)")
+            Text("Game: \(squirdle.name != "" ? squirdle.name : "\(squirdle.id)")")
             Text("Guesses: \(squirdle.guesses.count)")
         }
     }
     
     private func newGame() {
-        games.append(SquirdleViewModel())
+        let squirdle = SquirdleViewModel()
+        games.append(squirdle)
+        gameToEdit = squirdle
+        isEditing = true
     }
 }
+
+// MARK: Preview
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {

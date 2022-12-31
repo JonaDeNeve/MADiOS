@@ -25,6 +25,10 @@
 		3242AB74295A5D1C00E6A22A /* SquirdleStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3242AB73295A5D1C00E6A22A /* SquirdleStore.swift */; };
 		3242AB7F295A74D800E6A22A /* PARequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3242AB7E295A74D800E6A22A /* PARequest.swift */; };
 		3242AB81295AAC8200E6A22A /* PA+Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3242AB80295AAC8200E6A22A /* PA+Pokemon.swift */; };
+		3242AB85295E22FD00E6A22A /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3242AB84295E22FD00E6A22A /* Dummy.swift */; };
+		3242AB87295E519600E6A22A /* NewGameForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3242AB86295E519600E6A22A /* NewGameForm.swift */; };
+		3242AB89295EB6D800E6A22A /* GameInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3242AB88295EB6D800E6A22A /* GameInfo.swift */; };
+		3242AB8D295F88FA00E6A22A /* TypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3242AB8C295F88FA00E6A22A /* TypeView.swift */; };
 		32F97AE22956401200EF1D29 /* Squirdle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F97AE12956401200EF1D29 /* Squirdle.swift */; };
 		32F97AEB2958E39C00EF1D29 /* PAPokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F97AEA2958E39C00EF1D29 /* PAPokemon.swift */; };
 		32F97AED2958E4E400EF1D29 /* SquirdleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F97AEC2958E4E400EF1D29 /* SquirdleViewModel.swift */; };
@@ -73,6 +77,10 @@
 		3242AB73295A5D1C00E6A22A /* SquirdleStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquirdleStore.swift; sourceTree = "<group>"; };
 		3242AB7E295A74D800E6A22A /* PARequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PARequest.swift; sourceTree = "<group>"; };
 		3242AB80295AAC8200E6A22A /* PA+Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PA+Pokemon.swift"; sourceTree = "<group>"; };
+		3242AB84295E22FD00E6A22A /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
+		3242AB86295E519600E6A22A /* NewGameForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameForm.swift; sourceTree = "<group>"; };
+		3242AB88295EB6D800E6A22A /* GameInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfo.swift; sourceTree = "<group>"; };
+		3242AB8C295F88FA00E6A22A /* TypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeView.swift; sourceTree = "<group>"; };
 		32F97AE12956401200EF1D29 /* Squirdle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Squirdle.swift; sourceTree = "<group>"; };
 		32F97AEA2958E39C00EF1D29 /* PAPokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAPokemon.swift; sourceTree = "<group>"; };
 		32F97AEC2958E4E400EF1D29 /* SquirdleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquirdleViewModel.swift; sourceTree = "<group>"; };
@@ -192,6 +200,7 @@
 			children = (
 				322FC06B295571D400E4C753 /* PokeballStatus.swift */,
 				32F97AE12956401200EF1D29 /* Squirdle.swift */,
+				3242AB84295E22FD00E6A22A /* Dummy.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -239,6 +248,8 @@
 				322FC06929556CB700E4C753 /* Pokeball.swift */,
 				32F97AF729593B7700EF1D29 /* GuessedTypesView.swift */,
 				3242AB71295A388900E6A22A /* UtilityViews.swift */,
+				3242AB88295EB6D800E6A22A /* GameInfo.swift */,
+				3242AB8C295F88FA00E6A22A /* TypeView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -249,6 +260,7 @@
 				322FC02B2953A37000E4C753 /* HomeView.swift */,
 				322FC06129551BE200E4C753 /* SquirdleView.swift */,
 				32F97AF5295937F900EF1D29 /* PokemonDetailView.swift */,
+				3242AB86295E519600E6A22A /* NewGameForm.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -384,9 +396,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3242AB81295AAC8200E6A22A /* PA+Pokemon.swift in Sources */,
+				3242AB85295E22FD00E6A22A /* Dummy.swift in Sources */,
 				322FC06A29556CB700E4C753 /* Pokeball.swift in Sources */,
 				32F97AF829593B7700EF1D29 /* GuessedTypesView.swift in Sources */,
+				3242AB87295E519600E6A22A /* NewGameForm.swift in Sources */,
 				3242AB72295A388900E6A22A /* UtilityViews.swift in Sources */,
+				3242AB8D295F88FA00E6A22A /* TypeView.swift in Sources */,
 				322FC0332953A37200E4C753 /* Persistence.swift in Sources */,
 				322FC05B2954E19400E4C753 /* PokeballLower.swift in Sources */,
 				32F97AED2958E4E400EF1D29 /* SquirdleViewModel.swift in Sources */,
@@ -401,6 +416,7 @@
 				32F97AF6295937F900EF1D29 /* PokemonDetailView.swift in Sources */,
 				322FC06229551BE200E4C753 /* SquirdleView.swift in Sources */,
 				32F97AFC2959428700EF1D29 /* Extensions.swift in Sources */,
+				3242AB89295EB6D800E6A22A /* GameInfo.swift in Sources */,
 				32F97AE22956401200EF1D29 /* Squirdle.swift in Sources */,
 				32F97AF4295937E500EF1D29 /* GuessedPokemonView.swift in Sources */,
 			);
