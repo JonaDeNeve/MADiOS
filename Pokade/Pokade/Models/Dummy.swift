@@ -24,10 +24,15 @@ struct Dummy {
                     url: ""))],
         height: 10,
         weight: 95,
-        game_indices: [
-        PAVersionGameIndex(
-            game_index: 1,
-            version: NamedAPIResource(
-                name: "Red",
-                url: ""))])
+        sprites:
+            PASprites(
+                front_default: "https://archives.bulbagarden.net/media/upload/9/98/Missingno_RB.png"
+            )
+//        game_indices: [
+//        PAVersionGameIndex(
+//            game_index: 1,
+//            version: NamedAPIResource(
+//                name: "Red",
+//                url: ""))]
+    )
 }

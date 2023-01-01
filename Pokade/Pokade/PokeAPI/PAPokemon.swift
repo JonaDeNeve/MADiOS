@@ -11,33 +11,33 @@ struct PAPokemon: Codable, Hashable, Identifiable, Comparable, CustomStringConve
     
     // MARK: Variables
     
-    var test: String? = "Test"
     var id: Int
     var name: String
     var types: [PAPokemonType]
     var height: Int
     var weight: Int
-    var game_indices: [PAVersionGameIndex]
+    var sprites: PASprites
     
     var type1: String { types[0].type.name }
-    var type2: String { types[1].type.name }
-    var gen: Int { game_indices[0].game_index }
+    var type2: String {
+        types.count == 2 ? types[1].type.name : "blank"
+    }
+    var image: String { sprites.front_default }
     
     private enum CodingKeys: String, CodingKey {
-        case id, name, height, weight, types, game_indices
+        case id, name, types, height, weight, sprites
     }
     
     // MARK: Functions
     
     func compare(_ guess: Self) -> [PokeballStatus] {
         var status: [PokeballStatus] = []
-        status.append(compareInt(gen, guess.gen))
+        status.append(compareInt(id, guess.id))
         let types = compareTypes(guess)
         status.append(types[0])
         status.append(types[1])
         status.append(compareInt(height, guess.height))
         status.append(compareInt(weight, guess.weight))
-        print(status)
         return status
     }
     
@@ -46,7 +46,7 @@ struct PAPokemon: Codable, Hashable, Identifiable, Comparable, CustomStringConve
     static func < (lhs: PAPokemon, rhs: PAPokemon) -> Bool { lhs.id < rhs.id }
 
     var description: String {
-        return "\(name) \(gen) \(type1) \(type2) \(height) \(weight)"
+        return "#\(id) \(name) \(type1) \(type2) \(height) \(weight)"
     }
     
     func compareTypes(_ x: Self) -> [PokeballStatus] {
@@ -77,10 +77,10 @@ struct PAPokemon: Codable, Hashable, Identifiable, Comparable, CustomStringConve
             return .correct
         }
         else if x < y {
-            return .higher
+            return .lower
         }
         else {
-            return .lower
+            return .higher
         }
     }
 }
@@ -117,5 +117,15 @@ struct NamedAPIResource<T>: Codable {
     
     private enum CodingKeys: String, CodingKey {
         case name, url
+    }
+}
+
+// MARK: PokemonSprites
+
+struct PASprites: Codable {
+    var front_default: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case front_default
     }
 }

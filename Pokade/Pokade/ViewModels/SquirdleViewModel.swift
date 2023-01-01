@@ -57,7 +57,7 @@ class SquirdleViewModel: ObservableObject, Identifiable {
         if guess.isEmpty {
             return
         }
-        let pokemon = fetchPokemon(pokemon: guess.lowercased())
+        let pokemon = fetchPokemon(id: guess.lowercased())
         print(pokemon)
         model.guess(guess: pokemon)
     }
@@ -75,21 +75,25 @@ class SquirdleViewModel: ObservableObject, Identifiable {
         if random < 905 {
             random += 95
         }
-        return fetchPokemon(pokemon: "\(random)")
+        return fetchPokemon(id: "\(random)")
     }
     
-    private func fetchPokemon(pokemon: String) -> PAPokemon {
-//        return Dummy.pokemon
-        var response = Dummy.pokemon
-        let group = DispatchGroup()
-        group.enter()
-        
-        DispatchQueue.global(qos: .default).async {
-            response = PokemonRequest.fetch(pokemon) ?? Dummy.pokemon
-            group.leave()
+    private func fetchPokemon(id: String) -> PAPokemon {
+        let semaphore = DispatchSemaphore(value: 0)
+        let fetcher = PokemonFetcher()
+        var pokemon = Dummy.pokemon
+        fetcher.getPokemon(id: id) { result in
+            switch result {
+            case .success(let value):
+                pokemon = value
+            case .failure(let error):
+                print("Error: \(error)")
+                pokemon = Dummy.pokemon
+            }
+            semaphore.signal()
         }
-        group.wait()
-        return response
+        semaphore.wait()
+        return pokemon
     }
     
 }

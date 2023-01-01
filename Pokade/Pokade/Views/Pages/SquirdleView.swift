@@ -13,14 +13,19 @@ struct SquirdleView: View {
     var body: some View {
         GeometryReader { geo in
             VStack() {
-                HStack(spacing: 4) {
-                    Text("Gen")
+                HStack() {
+                    Text("Id")
+                        .frame(maxWidth: .infinity)
                     Text("Type 1")
+                        .frame(maxWidth: .infinity)
                     Text("Type 2")
+                        .frame(maxWidth: .infinity)
                     Text("Height")
+                        .frame(maxWidth: .infinity)
                     Text("Weight")
+                        .frame(maxWidth: .infinity)
                 }
-                .font(calculateFont(for: geo, with: 0.06))
+                .font(calculateFont(for: geo, with: 0.05))
                 .padding(.horizontal)
                 ScrollView {
                     ForEach(squirdle.guesses.reversed()) { pokemon in
@@ -41,7 +46,7 @@ struct SquirdleView: View {
                         guess = ""
                     }
                 }
-                .font(calculateFont(for: geo, with: 0.06))
+                .font(calculateFont(for: geo, with: 0.05))
                 .padding(.horizontal)
             }
         }

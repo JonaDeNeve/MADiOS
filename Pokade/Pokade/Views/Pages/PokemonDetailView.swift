@@ -18,7 +18,6 @@ struct PokemonDetailView: View {
                 Text("#\(pokemon.id)")
             }
             .font(.largeTitle)
-            Text("Generation: \(pokemon.gen)")
             Text("Type")
             HStack {
                 TypeView(type: pokemon.type1,

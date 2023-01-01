@@ -13,7 +13,7 @@ struct HomeView: View {
     @State private var editMode: EditMode = .inactive
     @State private var isEditing = false
     @State private var gameToEdit: SquirdleViewModel?
-    @State private var games: [SquirdleViewModel] = [SquirdleViewModel(),SquirdleViewModel()]
+    @State private var games: [SquirdleViewModel] = []
     
     var body: some View {
         NavigationView {
