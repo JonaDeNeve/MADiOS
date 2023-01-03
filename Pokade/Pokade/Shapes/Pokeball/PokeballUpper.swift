@@ -19,7 +19,7 @@ struct PokeballUpper: Shape {
         let center = CGPoint(x: rect.midX, y: rect.midY)
         let radius = min(rect.maxX, rect.maxY)/2
         let innerRadius = radius/4
-        let centerOffset = rect.maxY/offset
+        let centerOffset = min(rect.maxX, rect.maxY)/offset
         
         return Path { path in
             path.addArc(

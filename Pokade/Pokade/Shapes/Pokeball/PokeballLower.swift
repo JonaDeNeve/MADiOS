@@ -18,7 +18,7 @@ struct PokeballLower: Shape {
         let center = CGPoint(x: rect.midX, y: rect.midY)
         let radius = min(rect.maxX, rect.maxY)/2
         let innerRadius = radius/4
-        let centerOffset = rect.maxY/offset
+        let centerOffset = min(rect.maxX, rect.maxY)/offset
         
         return Path { path in
             path.addArc(
@@ -39,10 +39,10 @@ struct PokeballLower: Shape {
             path.addLine(to: CGPoint(
                 x: rect.midX-radius,
                 y: rect.midY))
-            path.move(to: center + CGPoint(x: innerRadius-20, y: centerOffset))
+            path.move(to: center + CGPoint(x: innerRadius/2, y: centerOffset))
             path.addArc(
                 center: center + CGPoint(x: 0, y: centerOffset),
-                radius: innerRadius-20,
+                radius: innerRadius/2,
                 startAngle: Angle(radians: 0),
                 endAngle: Angle(radians: .pi*2),
                 clockwise: false)
@@ -54,5 +54,6 @@ struct Previews_PokeballLower_Previews: PreviewProvider {
     static var previews: some View {
         PokeballLower(8)
             .stroke(lineWidth: 2)
+//            .frame(width: 50, height: 50)
     }
 }

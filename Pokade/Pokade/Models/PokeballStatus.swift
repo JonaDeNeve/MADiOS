@@ -13,4 +13,5 @@ enum PokeballStatus {
     case higher
     case lower
     case wrongPosition
+    case normal
 }

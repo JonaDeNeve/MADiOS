@@ -22,7 +22,7 @@ struct GuessedPokemonView: View {
             }
             .scaledToFit()
             .padding(.top)
-            Text("\(pokemon.name)")
+            Text("\(pokemon.name.capitalized)")
             Divider()
         }
         .padding(.horizontal)

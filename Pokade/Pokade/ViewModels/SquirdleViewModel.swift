@@ -5,7 +5,7 @@
 //  Created by Jona De Neve on 25/12/2022.
 //
 
-import Foundation
+import SwiftUI
 import Combine
 
 class SquirdleViewModel: ObservableObject, Identifiable {

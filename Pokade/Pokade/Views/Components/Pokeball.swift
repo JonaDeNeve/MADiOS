@@ -19,7 +19,7 @@ struct Pokeball: View {
     
     var body: some View {
         GeometryReader{ geo in
-            let x = geo.size.height/15
+            let x: CGFloat = 5
             ZStack {
                 PokeballUpper(x)
                     .stroke(lineWidth: lineWidth)
@@ -40,10 +40,12 @@ struct Pokeball: View {
                             .rotationEffect(.radians(.pi))
                     case .wrongPosition:
                         Image(systemName: "arrow.left.arrow.right")
+                    case .normal:
+                        EmptyView()
                     }
                 }
                 .font(iconFont(for: geo))
-                .offset(y: -geo.size.height/6.8)
+                .offset(y: -min(geo.size.width, geo.size.height)/x)
                 .foregroundColor(.white)
             }
             .foregroundColor(.black)
@@ -67,6 +69,8 @@ struct Pokeball: View {
             color = Color.blue
         case .wrongPosition:
             color = Color.orange
+        case .normal:
+            color = Color.red
         }
         return color
     }
@@ -77,6 +81,6 @@ struct Pokeball: View {
 struct Pokeball_Previews: PreviewProvider {
     static var previews: some View {
         Pokeball(status: .correct)
-//            .frame(width: 100, height: 100)
+            .frame(width: 100, height: 100)
     }
 }
