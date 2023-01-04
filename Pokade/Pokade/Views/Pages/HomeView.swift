@@ -12,6 +12,7 @@ struct HomeView: View {
     @EnvironmentObject private var store: SquirdleStore
     @State private var editMode: EditMode = .inactive
     @State private var isEditing = false
+    @State private var showInfo = false
     @State private var gameToEdit: SquirdleViewModel?
     @State private var games: [SquirdleViewModel] = []
     
@@ -51,7 +52,7 @@ struct HomeView: View {
                     newGame()
                 }
                 AnimatedActionButton(title: "How to play", systemImage: "info.circle") {
-                    
+                    showInfo = true
                 }
             }
             .environment(\.editMode, $editMode)
@@ -59,6 +60,9 @@ struct HomeView: View {
         .popover(item: $gameToEdit) { game in
             let index = games.firstIndex { $0.id == game.id }!
             NewGameForm(squirdle: $games[index])
+        }
+        .sheet(isPresented: $showInfo) {
+            GameInfo()
         }
     }
     

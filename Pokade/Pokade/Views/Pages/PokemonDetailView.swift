@@ -13,29 +13,8 @@ struct PokemonDetailView: View {
     
     var body: some View {
         let shape = RoundedRectangle(cornerRadius: 5)
-        GeometryReader { geo in
-                AsyncImage(url: URL(string: pokemon.image)) {
-                    $0.resizable()
-                        .aspectRatio(contentMode: .fit)
-                } placeholder: {
-                    ProgressView()
-                }
-                .frame(width: geo.size.width * 0.4, height: geo.size.height * 0.5)
+            Group {
                 VStack(spacing: 10) {
-                    ZStack{
-                        shape.fill(.red)
-                        shape.stroke()
-                        HStack {
-                            Pokeball(status: .normal)
-                                .background(Circle().stroke(.white, lineWidth: 10))
-                                .frame(width: 30, height: 30)
-                            Text("\(pokemon.id)")
-                            Spacer()
-                            Text(pokemon.name.capitalized)
-                        }
-                        .padding(.horizontal)
-                    }
-                    .frame(height: 50)
                     HStack {
                         TypeView(type: pokemon.type1,
                                  colour: types[pokemon.type1] ?? "#00000000")
@@ -51,9 +30,9 @@ struct PokemonDetailView: View {
                         }
                     }
                 }
-                .detailify()
+            }
+            .detailify(pokemon: pokemon)
         }
-    }
     
     init(_ pokemon: PAPokemon) {
         self.pokemon = pokemon
@@ -61,8 +40,8 @@ struct PokemonDetailView: View {
 }
 
 extension View {
-    func detailify() -> some View {
-            self.modifier(Detailify())
+    func detailify(pokemon: PAPokemon) -> some View {
+            self.modifier(Detailify(pokemon))
     }
 }
 
@@ -72,18 +51,84 @@ extension View {
 
 struct Detailify: ViewModifier {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    var compact: Bool { horizontalSizeClass == .compact }
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+    var hCompact: Bool { horizontalSizeClass == .compact }
+    var vCompact: Bool { verticalSizeClass == .compact }
+    
+    var pokemon: PAPokemon
     
     func body(content: Content) -> some View {
-        if compact {
-            VStack {
-                content
-            }
-        } else {
-            HStack {
-                content
+        GeometryReader { geo in
+            if hCompact && !vCompact {
+                VStack {
+                    title
+                    image
+                    content
+                    description
+                }
+            } else {
+                HStack {
+                    image
+                        .frame(width: geo.size.width * 0.4)
+                    VStack {
+                        title
+                        content
+                    }
+                }
+                description
             }
         }
+    }
+    
+    let shape = RoundedRectangle(cornerRadius: 5)
+    
+    var title: some View {
+        return ZStack {
+            shape.fill(.red)
+            shape.stroke()
+            HStack {
+                Pokeball(status: .normal)
+                    .background(Circle().stroke(.white, lineWidth: 10))
+                    .frame(width: 30, height: 30)
+                Text("\(pokemon.id)")
+                Spacer()
+                Text(pokemon.name.capitalized)
+            }
+            .padding(.horizontal)
+        }
+        .frame(height: 50)
+    }
+    
+    var image: some View {
+        AsyncImage(url: URL(string: pokemon.image)) {
+            $0.resizable()
+                .aspectRatio(contentMode: .fit)
+        } placeholder: {
+            ProgressView()
+        }
+    }
+    
+    var description: some View {
+        GeometryReader { geo in
+            ZStack {
+                shape.stroke()
+                HStack {
+                    shape
+                        .fill(.red)
+                        .frame(width: geo.size.width/20)
+                    Spacer()
+                    Text(pokemon.description)
+                    Spacer()
+                    shape
+                        .fill(.red)
+                        .frame(width: geo.size.width/20)
+                }
+            }
+        }
+    }
+    
+    init(_ pokemon: PAPokemon) {
+        self.pokemon = pokemon
     }
 }
 

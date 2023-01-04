@@ -8,35 +8,52 @@
 import SwiftUI
 
 struct GameInfo: View {
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
-        VStack {
-            HStack {
+        VStack(spacing: 15) {
+            if UIDevice.current.userInterfaceIdiom != .pad {
+                Button("Close") {
+                    dismiss()
+                }
+            }
+            Spacer()
+            Text("The goal of Squirdle is to find the hidden pokemon. By guessing other pokemon you can aquirre information.")
+            HStack(spacing: 20) {
                 Image(systemName: "checkmark")
-                    .background(Rectangle().fill(.green))
-                Text("means the values of both pokemon match.")
+                    .background(RoundedRectangle(cornerRadius: 10).fill(.green)
+                        .padding(-5))
+                Text("The values of both pokemon match.")
             }
-            HStack {
+            HStack(spacing: 20) {
                 Image(systemName: "xmark")
-                    .background(Rectangle().fill(.red))
-                Text("means the guessed type is wrong.")
+                    .background(RoundedRectangle(cornerRadius: 10).fill(.red)
+                        .padding(-5))
+                Text("The guessed type is wrong.")
             }
-            HStack {
+            HStack(spacing: 20) {
                 Image(systemName: "arrow.left.arrow.right")
-                    .background(Rectangle().fill(.green))
-                Text("means the guessed type is in the wrong position.")
+                    .background(RoundedRectangle(cornerRadius: 10).fill(.orange)
+                        .padding(-5))
+                Text("The guessed type is in the wrong position.")
             }
-            HStack {
+            HStack(spacing: 20) {
                 Image(systemName: "triangle.fill")
-                    .background(Rectangle().fill(.blue))
-                Text("means the guessed value is lower.")
+                    .background(RoundedRectangle(cornerRadius: 10).fill(.blue)
+                        .padding(-5))
+                Text("The target value is higher.")
             }
-            HStack {
+            HStack(spacing: 20) {
                 Image(systemName: "triangle.fill")
                     .rotationEffect(.radians(.pi))
-                    .background(Rectangle().fill(.blue))
-                Text("means the guessed value is higher.")
+                    .background(RoundedRectangle(cornerRadius: 10).fill(.blue)
+                        .padding(-5))
+                Text("The target value is lower.")
             }
+            Spacer()
         }
+        .padding(.horizontal)
+        .font(.title2)
     }
 }
 

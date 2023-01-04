@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="22A400" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="NamedAPIResource2" representedClassName="NamedAPIResource2" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PAPokemonType2" inverseName="type" inverseEntity="PAPokemonType2"/>
     </entity>
-    <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
-    </elements>
+    <entity name="PAPokemon2" representedClassName="PAPokemon2" syncable="YES" codeGenerationType="class">
+        <attribute name="height" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="weight" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="guessed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Squirdle2" inverseName="guesses" inverseEntity="Squirdle2"/>
+        <relationship name="sprites" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PASprites2" inverseName="pokemon" inverseEntity="PASprites2"/>
+        <relationship name="toGuess" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Squirdle2" inverseName="pokemon" inverseEntity="Squirdle2"/>
+        <relationship name="types" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PAPokemonType2" inverseName="pokemon" inverseEntity="PAPokemonType2"/>
+    </entity>
+    <entity name="PAPokemonType2" representedClassName="PAPokemonType2" syncable="YES" codeGenerationType="class">
+        <attribute name="slot" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="pokemon" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PAPokemon2" inverseName="types" inverseEntity="PAPokemon2"/>
+        <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NamedAPIResource2" inverseName="type" inverseEntity="NamedAPIResource2"/>
+    </entity>
+    <entity name="PASprites2" representedClassName="PASprites2" syncable="YES" codeGenerationType="class">
+        <attribute name="front_default" optional="YES" attributeType="String"/>
+        <relationship name="pokemon" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PAPokemon2" inverseName="sprites" inverseEntity="PAPokemon2"/>
+    </entity>
+    <entity name="Squirdle2" representedClassName="Squirdle2" syncable="YES" codeGenerationType="class">
+        <attribute name="guessedTypes" optional="YES" attributeType="String"/>
+        <attribute name="isComplete" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="guesses" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PAPokemon2" inverseName="guessed" inverseEntity="PAPokemon2"/>
+        <relationship name="pokemon" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PAPokemon2" inverseName="toGuess" inverseEntity="PAPokemon2"/>
+    </entity>
 </model>

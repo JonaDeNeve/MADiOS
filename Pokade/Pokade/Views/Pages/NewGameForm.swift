@@ -8,10 +8,16 @@
 import SwiftUI
 
 struct NewGameForm: View {
+    @Environment(\.dismiss) var dismiss
     
     @Binding var squirdle: SquirdleViewModel
     
     var body: some View {
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            Button("Close") {
+                dismiss()
+            }
+        }
         Form {
             Section {
                 TextField("Name", text: $squirdle.name)
